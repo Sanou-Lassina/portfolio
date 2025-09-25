@@ -424,12 +424,7 @@ else:
 
 
 # Section Contact
-st.markdown('<h2 class="section-header">Me laisser un message</h2>', unsafe_allow_html=True)
-
-import streamlit as st
-
-# Section Contact
-st.markdown("## 📩 Me laisser un message")
+st.markdown('<h2 class="section-header">📩 Me laisser un message</h2>', unsafe_allow_html=True)
 
 # Formulaire HTML via FormSubmit
 contact_form = """
