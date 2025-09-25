@@ -456,62 +456,99 @@ st.markdown('<h2 class="section-header">Me laisser un message</h2>', unsafe_allo
 contact_form = """
 <form id="contactForm" action="https://formsubmit.co/slassina92@gmail.com" method="POST">
      <input type="hidden" name="_captcha" value="false">
-     <input type="hidden" name="_next" value="">
      <input type="text" name="name" placeholder="Votre nom" required>
      <input type="email" name="email" placeholder="Votre email" required>
      <textarea name="message" placeholder="Votre message" required></textarea>
      <button type="submit">Envoyer</button>
-     
-     <div id="notification" style="display: none; background-color: #4CAF50; color: white; padding: 12px; border-radius: 4px; margin-top: 10px; text-align: center;">
-         ✅ Message envoyé avec succès !
-     </div>
 </form>
+
+<div id="notification" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 15px; border-radius: 5px; z-index: 1000;">
+    ✅ Message envoyé avec succès !
+</div>
 
 <script>
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Afficher la notification
-    var notification = document.getElementById('notification');
-    notification.style.display = 'block';
+    // Créer une copie du formulaire pour l'envoi
+    const form = e.target;
+    const formData = new FormData(form);
     
-    // Soumettre le formulaire de façon asynchrone
-    setTimeout(function() {
-        var form = e.target;
-        var formData = new FormData(form);
-        
-        fetch(form.action, {
-            method: 'POST',
-            body: formData
-        }).then(function(response) {
-            if (response.ok) {
-                // Réinitialiser le formulaire après envoi réussi
-                form.reset();
-                
-                // Cacher la notification après 3 secondes
-                setTimeout(function() {
-                    notification.style.display = 'none';
-                }, 3000);
-            }
-        }).catch(function(error) {
-            // En cas d'erreur, changer le message
-            notification.innerHTML = '❌ Erreur lors de l\'envoi';
-            notification.style.backgroundColor = '#f44336';
+    // Envoyer le formulaire en arrière-plan
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // Afficher la notification
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
             
-            // Cacher après 3 secondes
-            setTimeout(function() {
+            // Cacher la notification après 3 secondes
+            setTimeout(() => {
                 notification.style.display = 'none';
-                // Réinitialiser l'apparence pour le prochain envoi
-                setTimeout(function() {
-                    notification.innerHTML = '✅ Message envoyé avec succès !';
-                    notification.style.backgroundColor = '#4CAF50';
-                }, 100);
             }, 3000);
-        });
-    }, 500);
+            
+            // Réinitialiser le formulaire
+            form.reset();
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+    });
 });
 </script>
 """
+
+st.markdown(contact_form, unsafe_allow_html=True)
+
+# CSS pour le formulaire de contact et la notification
+st.markdown("""
+<style>
+input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+button[type=submit] {
+    background-color: #1E88E5;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type=submit]:hover {
+    background-color: #0D47A1;
+}
+
+#notification {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 
 st.markdown(contact_form, unsafe_allow_html=True)
 
