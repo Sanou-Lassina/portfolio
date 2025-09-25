@@ -426,46 +426,28 @@ else:
 # Section Contact
 st.markdown('<h2 class="section-header">Me laisser un message</h2>', unsafe_allow_html=True)
 
-contact_form = """
-<form action="https://formsubmit.co/slassina92@gmail.com" method="POST">
-     <input type="hidden" name="_captcha" value="false">
-     <input type="text" name="name" placeholder="Votre nom" required>
-     <input type="email" name="email" placeholder="Votre email" required>
-     <textarea name="message" placeholder="Votre message" required></textarea>
-     <button type="submit">Envoyer</button>
-</form>
-"""
+import smtplib
+from email.mime.text import MIMEText
 
-st.markdown(contact_form, unsafe_allow_html=True)
+with st.form("contact_form", clear_on_submit=True):
+    name = st.text_input("Votre Nom")
+    email = st.text_input("Votre Email")
+    message = st.text_area("Votre Message")
+    submitted = st.form_submit_button("Envoyer")
 
-# CSS pour le formulaire de contact
-st.markdown("""
-<style>
-input[type=text], input[type=email], textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
+    if submitted:
+        msg = MIMEText(f"Nom: {name}\nEmail: {email}\nMessage:\n{message}")
+        msg["Subject"] = "Nouveau message du formulaire Streamlit"
+        msg["From"] = email
+        msg["To"] = "slassina92@gmail.com"
 
-button[type=submit] {
-    background-color: #1E88E5;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        # Connexion Gmail (mot de passe applicatif requis)
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login("slassina92@gmail.com", "APPSANOU123")
+            server.send_message(msg)
 
-button[type=submit]:hover {
-    background-color: #0D47A1;
-}
-</style>
-""", unsafe_allow_html=True)
+        st.toast("✅ Message envoyé avec succès !", icon="📩")
+
 
 # Pied de page
 st.markdown("---")
