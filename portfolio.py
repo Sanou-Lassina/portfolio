@@ -346,7 +346,9 @@ with st.container():
         st.markdown(about_me)
 
         about_me = """
-        **RESUME DES RESULTATS :** Trois grands profils de clients ont été 
+        **RESUME DES RESULTATS :** 
+        
+        Trois grands profils de clients ont été 
         identifiés :
         Un groupe dominant (Cluster 0), assez homogène.
         Un groupe différencié (Cluster 1) qui se distingue nettement sur PCA1.
@@ -357,15 +359,12 @@ with st.container():
         les offres commerciales ou encore les actions de fidélisation.
         
         **Par exemple :**
-        Cluster 0 : clients “premium” à forte valeur → programmes VIP, 
+        Cluster 0 : clients “premium” à forte valeur (par exemple pour un programmes VIP), 
         fidélisation.
-        Cluster 1 : clients “économes” → offres promotionnelles pour les 
-        inciter à consommer plus.
-        Cluster 2 : clients “intermédiaires” → stratégie hybride pour les 
-        faire basculer vers plus de valeur.
+        Cluster 1 : clients “économes” (offres promotionnelles pour les inciter à consommer plus).
+        Cluster 2 : clients “intermédiaires” (stratégie hybride pour les faire basculer vers plus de valeur).
 
-        **👉 En résumé**, ce clustering révèle des segments distincts de 
-        clientèle, utiles pour adapter les actions commerciales et 
+        **👉 En résumé**, ce clustering révèle des segments distincts de clientèle, utiles pour adapter les actions commerciales et 
         améliorer la personnalisation des services
         """
         st.markdown(about_me)
