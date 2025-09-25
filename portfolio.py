@@ -417,7 +417,7 @@ else:
 
 
 # Section Contact
-st.markdown('<h2 class="section-header">ME CONTACTER</h2>', unsafe_allow_html=True)
+st.markdown('<h2 class="section-header">Me laisser un message</h2>', unsafe_allow_html=True)
 
 contact_form = """
 <form action="https://formsubmit.co/slassina92@gmail.com" method="POST">
