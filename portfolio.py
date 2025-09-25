@@ -215,7 +215,16 @@ with st.container():
         st.markdown("L’analyse exploratoire constitue une première étape essentielle, permettant de :\n- Mesurer la corrélation entre les variables climatiques (température, précipitations, humidité, vent, ensoleillement) et les rendements des cultures, afin d’identifier les facteurs les plus déterminants.\n- Détecter les régions à forte variabilité interannuelle, en mettant en évidence les fluctuations de production et les anomalies climatiques au fil des années.\n- Offrir une interface simple, interactive et intuitive, accessible via le web grâce à Streamlit, permettant aux utilisateurs de consulter à la fois les données historiques et les prévisions à venir.")
         st.markdown("**Technologies :** \n - Python (Pandas, Scipy, Matplotlib/Seaborn \n - Streamlit")
         st.markdown("[Voir le projet sur Google Colab](https://colab.research.google.com/drive/14Paui8Yf24fTbSfTMSULxlqx-Mem5N74?usp=sharing)")
-        
+
+        about_me = """
+        **Rrésultats**
+        1.**Importance de la validation croisée spatiale** : Grâce au GroupKFold, le modèle est évalué en laissant une région entière en dehors à chaque itération. Cela teste vraiment la capacité du modèle à généraliser sur une région jamais vue, ce qui est plus réaliste que la CV classique.
+        2.**Performance globale** : le best_score_ correspond au R² moyen sur les folds. Plus ce score est proche de 1, mieux le modèle explique la variance du rendement. Si le score est négatif, cela signifie que le modèle prédit moins bien qu’une simple moyenne 
+        3.**Interprétation métier** : le modèle apprend à prédire le rendement céréalier (tonne/ha) à partir : du climat (précipitations, température, humidité, vent, ensoleillement), de la superficie cultivée, de l’année (tendance temporelle), et des caractéristiques régionales et types de céréales.
+        4.**Les variables les plus importantes (via feature_importances_ du RandomForest)** vont indiquer quels facteurs influencent le plus la production.
+        """
+        st.markdown(about_me)
+
         if st.button("Lien de la Visualisation" , key="vis1"):
             st.info("⚠️ Cette partie est en cours d'établissement")
 
