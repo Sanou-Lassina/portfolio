@@ -449,6 +449,95 @@ with st.form("contact_form", clear_on_submit=True):
         st.toast("✅ Message envoyé avec succès !", icon="📩")
 
 
+
+# Section Contact
+st.markdown('<h2 class="section-header">Me laisser un message</h2>', unsafe_allow_html=True)
+
+contact_form = """
+<form id="contactForm" action="https://formsubmit.co/slassina92@gmail.com" method="POST">
+     <input type="hidden" name="_captcha" value="false">
+     <input type="hidden" name="_next" value="">
+     <input type="text" name="name" placeholder="Votre nom" required>
+     <input type="email" name="email" placeholder="Votre email" required>
+     <textarea name="message" placeholder="Votre message" required></textarea>
+     <button type="submit">Envoyer</button>
+</form>
+
+<div id="notification" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 15px; border-radius: 5px; z-index: 1000;">
+    Message envoyé avec succès ! ✅
+</div>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Afficher la notification
+    var notification = document.getElementById('notification');
+    notification.style.display = 'block';
+    
+    // Soumettre le formulaire après un court délai
+    setTimeout(function() {
+        // Créer une soumission de formulaire temporaire
+        var form = e.target;
+        var formData = new FormData(form);
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        }).then(function(response) {
+            if (response.ok) {
+                // Réinitialiser le formulaire après envoi réussi
+                form.reset();
+                
+                // Cacher la notification après 3 secondes
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 3000);
+            }
+        });
+    }, 500);
+});
+</script>
+"""
+
+st.markdown(contact_form, unsafe_allow_html=True)
+
+# CSS pour le formulaire de contact
+st.markdown("""
+<style>
+input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+button[type=submit] {
+    background-color: #1E88E5;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type=submit]:hover {
+    background-color: #0D47A1;
+}
+
+#notification {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 # Pied de page
 st.markdown("---")
 st.markdown("<div style='text-align: center; color: gray;'>© 2025 SANOU Lassina - Tous droits réservés</div>", unsafe_allow_html=True)
