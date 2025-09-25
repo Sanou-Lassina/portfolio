@@ -461,11 +461,11 @@ contact_form = """
      <input type="email" name="email" placeholder="Votre email" required>
      <textarea name="message" placeholder="Votre message" required></textarea>
      <button type="submit">Envoyer</button>
+     
+     <div id="notification" style="display: none; background-color: #4CAF50; color: white; padding: 12px; border-radius: 4px; margin-top: 10px; text-align: center;">
+         ✅ Message envoyé avec succès !
+     </div>
 </form>
-
-<div id="notification" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 15px; border-radius: 5px; z-index: 1000;">
-    Message envoyé avec succès ! ✅
-</div>
 
 <script>
 document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -475,9 +475,8 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     var notification = document.getElementById('notification');
     notification.style.display = 'block';
     
-    // Soumettre le formulaire après un court délai
+    // Soumettre le formulaire de façon asynchrone
     setTimeout(function() {
-        // Créer une soumission de formulaire temporaire
         var form = e.target;
         var formData = new FormData(form);
         
@@ -494,6 +493,20 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
                     notification.style.display = 'none';
                 }, 3000);
             }
+        }).catch(function(error) {
+            // En cas d'erreur, changer le message
+            notification.innerHTML = '❌ Erreur lors de l\'envoi';
+            notification.style.backgroundColor = '#f44336';
+            
+            // Cacher après 3 secondes
+            setTimeout(function() {
+                notification.style.display = 'none';
+                // Réinitialiser l'apparence pour le prochain envoi
+                setTimeout(function() {
+                    notification.innerHTML = '✅ Message envoyé avec succès !';
+                    notification.style.backgroundColor = '#4CAF50';
+                }, 100);
+            }, 3000);
         });
     }, 500);
 });
@@ -523,6 +536,7 @@ button[type=submit] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
 }
 
 button[type=submit]:hover {
@@ -530,9 +544,10 @@ button[type=submit]:hover {
 }
 
 #notification {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
     font-family: Arial, sans-serif;
     font-size: 14px;
+    font-weight: bold;
 }
 </style>
 """, unsafe_allow_html=True)
