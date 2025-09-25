@@ -261,10 +261,9 @@ with st.container():
         """
         st.markdown(about_me)
 
-
         st.markdown("**Technologies:** Python, Scikit-learn, Pandas, NumPy, Seaborn, Matplotlib")
         st.markdown("[Voir le projet sur Google Colab](https://colab.research.google.com/drive/1YOmx4uDFggizyO-Y0MvkcuWWYZCEXuZx?usp=sharing)")
-        
+
         if st.button("Lien de la Visualisation" , key="vis2"):
             st.info("⚠️ Cette partie est en cours d'établissement")
 
@@ -343,17 +342,16 @@ with st.container():
         d'utiliser des techniques de réduction de dimension pour 
         visualiser les clusters en fin d'indentifier les groupes de clients
         par rapport à leur comportement d'achat.
-        
         """
         st.markdown(about_me)
 
         about_me = """
-        *RESUME DES RESULTATS* : Trois grands profils de clients ont été 
+        **RESUME DES RESULTATS :** Trois grands profils de clients ont été 
         identifiés :
         Un groupe dominant (Cluster 0), assez homogène.
         Un groupe différencié (Cluster 1) qui se distingue nettement sur PCA1.
         Un groupe intermédiaire (Cluster 2) qui partage des caractéristiques avec les deux premiers.
-        
+
         **Intérêt business :**
         Cette segmentation permet de mieux cibler les stratégies marketing, 
         les offres commerciales ou encore les actions de fidélisation.
