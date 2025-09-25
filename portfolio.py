@@ -148,7 +148,7 @@ with st.sidebar:
         st.progress(level)
 
 # Section À propos
-st.markdown('<h2 class="section-header">À propos de moi</h2>', unsafe_allow_html=True)
+st.markdown('<h2 class="section-header">🧑‍💼 À propos de moi</h2>', unsafe_allow_html=True)
 about_me = """
 Je suis un **Statisticien, Data Analyst et Data Scientist** passionné avec 
 2 ans d'expérience dans le traitement, analysse et visualisation des 
@@ -177,7 +177,7 @@ st.markdown(about_me)
 
 
 # Section Projets
-st.markdown('<h2 class="section-header">Mes trois derniers projets</h2>', unsafe_allow_html=True)
+st.markdown('<h2 class="section-header">🚀 Mes trois derniers projets</h2>', unsafe_allow_html=True)
 
 # Projet 1
 with st.container():
@@ -380,7 +380,7 @@ with st.container():
 
 
 # Section Expérience professionnelle
-st.markdown('<h2 class="section-header">Expérience Professionnelle</h2>', unsafe_allow_html=True)
+st.markdown('<h2 class="section-header">💼 Expérience Professionnelle</h2>', unsafe_allow_html=True)
 
 exp_data = {
     "Poste": ["Stagiaire en Data Analyst", "Stagiaire Statisticien Data Analyst", "Stagiaire Gestion de base de données", "Étudiant stagiaire"],
@@ -405,7 +405,7 @@ else:
 
 
 # Section Formation
-st.markdown('<h2 class="section-header">Formation</h2>', unsafe_allow_html=True)
+st.markdown('<h2 class="section-header">🎓 Formation</h2>', unsafe_allow_html=True)
 
 education_data = {
     "Diplôme": ["Master en Statistique Appliquée et Aide à la Décision", "Licence en Statistique Informatique", "Baccalauréat série D", "Certificat d'expertise en gestion des projets", "Certificat d'expertise en suivi et évaluation"],
