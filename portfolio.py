@@ -426,28 +426,72 @@ else:
 # Section Contact
 st.markdown('<h2 class="section-header">Me laisser un message</h2>', unsafe_allow_html=True)
 
-import smtplib
-from email.mime.text import MIMEText
+import streamlit as st
 
-with st.form("contact_form", clear_on_submit=True):
-    name = st.text_input("Votre Nom")
-    email = st.text_input("Votre Email")
-    message = st.text_area("Votre Message")
-    submitted = st.form_submit_button("Envoyer")
+# Section Contact
+st.markdown("## 📩 Me laisser un message")
 
-    if submitted:
-        msg = MIMEText(f"Nom: {name}\nEmail: {email}\nMessage:\n{message}")
-        msg["Subject"] = "Nouveau message du formulaire Streamlit"
-        msg["From"] = email
-        msg["To"] = "slassina92@gmail.com"
+# Formulaire HTML via FormSubmit
+contact_form = """
+<form action="https://formsubmit.co/slassina92@gmail.com" method="POST">
+     <input type="hidden" name="_captcha" value="false">
+     <input type="hidden" name="_next" value="https://portfoliosanou.streamlit.app/"> <!-- page de redirection -->
+     <input type="text" name="name" placeholder="Votre nom" required>
+     <input type="email" name="email" placeholder="Votre email" required>
+     <textarea name="message" placeholder="Votre message" required></textarea>
+     <button type="submit">Envoyer</button>
+</form>
+"""
 
-        # Connexion Gmail (mot de passe applicatif requis)
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login("slassina92@gmail.com", "APPSANOU123")
-            server.send_message(msg)
+st.markdown(contact_form, unsafe_allow_html=True)
 
-        st.toast("✅ Message envoyé avec succès !", icon="📩")
+# Notification après envoi (simulation côté client)
+st.markdown("""
+<script>
+const form = document.querySelector("form");
+form.addEventListener("submit", function() {
+    setTimeout(() => {
+        const toast = document.createElement("div");
+        toast.innerText = "✅ Message envoyé avec succès !";
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.right = "20px";
+        toast.style.background = "#1E88E5";
+        toast.style.color = "white";
+        toast.style.padding = "10px 20px";
+        toast.style.borderRadius = "8px";
+        toast.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2)";
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }, 500);
+});
+</script>
+""", unsafe_allow_html=True)
 
+# CSS
+st.markdown("""
+<style>
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+button[type=submit] {
+    background-color: #1E88E5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+button[type=submit]:hover {
+    background-color: #0D47A1;
+}
+</style>
+""", unsafe_allow_html=True)
 
 
 # Pied de page
